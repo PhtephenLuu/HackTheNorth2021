@@ -13,8 +13,8 @@ def prompt():
     time_view = input("Enter time series view: ")
     result['time_view'] = time_view
 
-    # options are [cases, mortality]
-    stats = input("Enter to view cases/deaths: ")
+    # options are [cases, mortality, recovered, testing, active, avaccine, dvaccine]
+    stats = input("Enter statistic to view: ")
     result['stats'] = stats
     return result
 
