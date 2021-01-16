@@ -1,6 +1,6 @@
 # HackTheNorth2021
 
-Hello welcome to our groups project made during HackTheNorth2021, our project is a Covid data visualizer based on data from the API [https://opencovid.ca/api/](https://opencovid.ca/api/) displayed using the dash library. 
+Hello and welcome to our HackTheNorth2021 group project! We created a COVID dashboard for Canada using Python, Plotly and Dash. The visualizations display data gathered from the OpenCovid API [https://opencovid.ca/api/](https://opencovid.ca/api/). 
 
 ## Installation
 First navigate to the folder where you cloned the repository and then install all the packages via pip
