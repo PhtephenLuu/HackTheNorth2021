@@ -3,6 +3,8 @@ import json
 import requests
 import pandas as pd
 
+
+
 def prompt():
     result = {}
     # options are ["AB", "BC", "MB", "NB", "NL", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT"]
@@ -55,15 +57,12 @@ def calculate_date(user_choice):
     return date
 
 def get_request(province, dates, stats):
-    #dates = calculate_date()
-    print(dates)
     first_date = dates['yesterday']
     second_date = dates['today']
     URL = f"https://api.opencovid.ca/timeseries?stat={stats}&loc={province}&before={second_date}&after={first_date}"
     # DD - MM - YYYY
     response = requests.request("GET", URL)
     json_data = json.loads(response.text)
-    print(json_data)
     
     with open(f"sample_outputs/{province}_{first_date}to{second_date}_{stats}.json", "w") as f:
         json.dump(json_data, f, indent=4)
@@ -74,7 +73,16 @@ def get_cases_from_data(json_data):
     result = {}
     inner = json_data.get("cases")
     for each in inner:
-        result[each['date_report']] = each['cases']
+        current_date = each['date_report']
+        current_cases = each['cases']
+        if 'date' not in result:
+            result['date'] = [current_date]
+        else:
+            result['date'].append(current_date)
+        if 'cases' not in result:
+            result['cases'] = [current_cases]
+        else:
+            result['cases'].append(current_cases)
     return result
 
 def get_cumul_cases_from_data(json_data):
