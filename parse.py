@@ -86,9 +86,18 @@ def get_cases_from_data(json_data):
 def get_cumul_cases_from_data(json_data):
     '''ONLY CAN BE USED IF STATS = "cases" '''
     result = {}
-    inner = json_data.get("cases")
+    inner = json_data.get("cumulative_cases")
     for each in inner:
-        result[each['date_report']] = each['cumulative_cases']
+        current_date = each['date_report']
+        current_cases = each['cases']
+        if 'date' not in result:
+            result['date'] = [current_date]
+        else:
+            result['date'].append(current_date)
+        if 'cases' not in result:
+            result['cumulative_cases'] = [current_cases]
+        else:
+            result['cumulative_cases'].append(current_cases)
     return result
 
 def get_deaths_from_data(json_data):
@@ -113,7 +122,16 @@ def get_cumul_deaths_from_data(json_data):
     result = {}
     inner = json_data.get("mortality")
     for each in inner:
-        result[each['date_death_report']] = each['cumulative_deaths']
+        current_date = each['date_death_report']
+        current_cases = each['cumulative_deaths']
+        if 'date_death_report' not in result:
+            result['date_death_report'] = [current_date]
+        else:
+            result['date_death_report'].append(current_date)
+        if 'deaths' not in result:
+            result['cumulative_deaths'] = [current_cases]
+        else:
+            result['cumulative_deaths'].append(current_cases)
     return result
 
 def main():
