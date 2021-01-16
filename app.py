@@ -69,20 +69,7 @@ app.layout = html.Div([
     [Input('province-dropdown', 'value')])
 def update_province_output(value):
     return f"Province selected: {value}"
-'''
-@app.callback(
-    Output('mapbox', 'figure'),
-    [Input('province-dropdown', 'value')]
-)
-def update_province_graph(value):
-    PROVINCE = value
-    json_data = get_request(PROVINCE, DATES, STATS)
-    df = get_cases_from_data(json_data)
 
-    fig = px.line(df, x="date", y="cases")
-    fig.update_layout(transition_duration=500)
-    return fig
-'''
 @app.callback(
     Output('dd-time-output-container', 'children'),
     [Input('time-dropdown', 'value')])
@@ -91,14 +78,21 @@ def update_time_output(value):
 
 @app.callback(
     Output('mapbox', 'figure'),
-    [Input('time-dropdown', 'value')]
+    Input('province-dropdown', 'value'),
+    Input('time-dropdown', 'value'),
+    Input('stats-dropdown', 'value')
 )
-def update_time_graph(value):
-    DATES = calculate_date(value)
+def update_graph(prov_val, time_val, stats_val):
+    PROVINCE = prov_val
+    DATES = calculate_date(time_val)
+    STATS = stats_val
     json_data = get_request(PROVINCE, DATES, STATS)
-    df = get_cases_from_data(json_data)
-
-    fig = px.line(df, x="date", y="cases")
+    if STATS == 'cases':
+        df = get_cases_from_data(json_data)  
+        fig = px.line(df, x="date", y="cases")
+    elif STATS == 'mortality':
+        df = get_deaths_from_data(json_data)  
+        fig = px.line(df, x="date_death_report", y="deaths")
     fig.update_layout(transition_duration=500)
     return fig
 
@@ -107,20 +101,7 @@ def update_time_graph(value):
     [Input('stats-dropdown', 'value')])
 def update_stats_output(value):
     return f"Statistic selected: {value}"
-'''
-@app.callback(
-    Output('mapbox', 'figure'),
-    [Input('stats-dropdown', 'value')]
-)
-def update_stats_graph(value):
-    STATS = value
-    json_data = get_request(PROVINCE, DATES, STATS)
-    df = get_cases_from_data(json_data)
 
-    fig = px.line(df, x="date", y="cases")
-    fig.update_layout(transition_duration=500)
-    return fig
-'''
 
 if __name__ == "__main__":
     app.run_server(debug=True)

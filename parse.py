@@ -63,9 +63,6 @@ def get_request(province="MB", dates=get_weekly(), stats="cases"):
     # DD - MM - YYYY
     response = requests.request("GET", URL)
     json_data = json.loads(response.text)
-    
-    with open(f"sample_outputs/{province}_{first_date}to{second_date}_{stats}.json", "w") as f:
-        json.dump(json_data, f, indent=4)
     return json_data
 
 def get_cases_from_data(json_data):
@@ -98,7 +95,16 @@ def get_deaths_from_data(json_data):
     result = {}
     inner = json_data.get("mortality")
     for each in inner:
-        result[each['date_death_report']] = each['deaths']
+        current_date = each['date_death_report']
+        current_cases = each['deaths']
+        if 'date_death_report' not in result:
+            result['date_death_report'] = [current_date]
+        else:
+            result['date_death_report'].append(current_date)
+        if 'deaths' not in result:
+            result['deaths'] = [current_cases]
+        else:
+            result['deaths'].append(current_cases)
     return result
 
 def get_cumul_deaths_from_data(json_data):
