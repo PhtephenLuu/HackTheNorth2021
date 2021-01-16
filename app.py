@@ -18,8 +18,13 @@ fig = px.line(df, x="date", y="cases")
 
 app.layout = html.Div([
     html.Div([
-    html.H2('COVID-19 Data Visualization of Canada'),
-    ],className="banner"),
+        html.H2('COVID-19 Data Visualization of Canada'),
+    ], className="banner"),
+
+    html.Div([
+        html.H4('Fill in the boxes below'),
+    ], className="about"),
+
     dcc.Dropdown(
         id='province-dropdown',
         className='dropdowns',
@@ -51,7 +56,7 @@ app.layout = html.Div([
         ],
         placeholder="Select a timeframe:",
         value="weekly"
-    ),dcc.Dropdown(
+    ), dcc.Dropdown(
         id='stats-dropdown',
         className='dropdowns',
         options=[
@@ -65,10 +70,12 @@ app.layout = html.Div([
     html.Div(id='dd-time-output-container'),
     html.Div(id='dd-stats-output-container'),
     dcc.Graph(
-                id='mapbox',
-                figure=fig
-        )
+        id='mapbox',
+        figure=fig
+    )
+
 ])
+
 
 @app.callback(
     Output('dd-province-output-container', 'children'),
@@ -76,11 +83,13 @@ app.layout = html.Div([
 def update_province_output(value):
     return f"Province selected: {value}"
 
+
 @app.callback(
     Output('dd-time-output-container', 'children'),
     [Input('time-dropdown', 'value')])
 def update_time_output(value):
     return f"Timeframe selected: {value}"
+
 
 @app.callback(
     Output('mapbox', 'figure'),
@@ -94,17 +103,18 @@ def update_graph(prov_val, time_val, stats_val):
     STATS = stats_val
     json_data = get_request(PROVINCE, DATES, STATS)
     if STATS == 'cases':
-        df = get_cases_from_data(json_data)  
+        df = get_cases_from_data(json_data)
         fig = px.line(df, x="date", y="cases")
     elif STATS == 'mortality':
-        df = get_deaths_from_data(json_data)  
+        df = get_deaths_from_data(json_data)
         fig = px.line(df, x="date_death_report", y="deaths")
     fig.update_layout(
-    autosize=False,
-    width=1000,
-    height=500,
+        autosize=False,
+        width=1000,
+        height=500,
     )
     return fig
+
 
 @app.callback(
     Output('dd-stats-output-container', 'children'),
