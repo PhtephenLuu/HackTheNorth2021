@@ -62,22 +62,37 @@ app.layout = html.Div([
         ],
         placeholder="Select a timeframe:",
         value="weekly"
-    ), dcc.Dropdown(
-        id='stats-dropdown',
-        className='dropdowns',
+    ),
+    html.Div([
+        dcc.Checklist(
+        id="checklist",
         options=[
-            {'label': 'Cases', 'value': 'cases'},
-            {'label': 'Deaths', 'value': 'mortality'}
+            {"label": "Cases", "value": "cases"},
+            {"label": "Deaths", "value": "mortality"},
+            {"label": "Recovered", "value": "recovered"},
+            {"label": "Testing", "value": "testing"},
+            {"label": "Active", "value": "active"}
         ],
-        placeholder="Select a statistic:",
-        value="cases"
+        value=["cases", "mortality", "recovered", "testing", "active"],
+        labelStyle={'display': 'inline-block'}
+        )], className="checklist-container"
     ),
     html.Div(id='dd-province-output-container',
              className='info-display'),
     html.Div(id='dd-time-output-container',
+<<<<<<< HEAD
+<<<<<<< HEAD
+    className='info-display'),
+=======
              className='info-display'),
     html.Div(id='dd-stats-output-container',
              className='info-display'),
+>>>>>>> c41b4a35c7653569ddce34eb8c2143008e51f604
+=======
+             className='info-display'),
+    html.Div(id='dd-stats-output-container',
+             className='info-display'),
+>>>>>>> c41b4a35c7653569ddce34eb8c2143008e51f604
     dcc.Graph(
         id='mapbox',
         figure=fig
@@ -103,13 +118,15 @@ def update_time_output(value):
 @ app.callback(
     Output('mapbox', 'figure'),
     Input('province-dropdown', 'value'),
-    Input('time-dropdown', 'value'),
-    Input('stats-dropdown', 'value')
+    Input('time-dropdown', 'value')
 )
-def update_graph(prov_val, time_val, stats_val):
+def update_graph(prov_val, time_val):
     PROVINCE = prov_val
     DATES = calculate_date(time_val)
+<<<<<<< HEAD
+=======
     STATS = stats_val
+>>>>>>> c41b4a35c7653569ddce34eb8c2143008e51f604
     #json_data = get_request(PROVINCE, DATES, STATS)
     
     df = get_all_info(PROVINCE, DATES)
@@ -121,6 +138,8 @@ def update_graph(prov_val, time_val, stats_val):
     )
     return fig
 
+<<<<<<< HEAD
+=======
 
 @app.callback(
     Output('dd-stats-output-container', 'children'),
@@ -128,6 +147,7 @@ def update_graph(prov_val, time_val, stats_val):
 def update_stats_output(value):
     return f"Statistic selected: {value}"
 
+>>>>>>> c41b4a35c7653569ddce34eb8c2143008e51f604
 
 if __name__ == "__main__":
     app.run_server(debug=True)
