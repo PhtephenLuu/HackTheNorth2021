@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import json
+from dateutil.relativedelta import relativedelta
 import requests
 import pandas as pd
 
@@ -24,7 +25,7 @@ def prompt():
 def get_weekly():
     dates = {}
     today = datetime.now()
-    yesterday = datetime.now() - timedelta(7)
+    yesterday = datetime.now() - relativedelta(weeks=1)
     dates['today'] = today.strftime('%d-%m-%Y')
     dates['yesterday'] = yesterday.strftime('%d-%m-%Y')
     return dates
@@ -32,7 +33,7 @@ def get_weekly():
 def get_monthly():
     dates = {}
     today = datetime.now()
-    yesterday = datetime.now() - timedelta(30)
+    yesterday = datetime.now() - relativedelta(months=1)
     dates['today'] = today.strftime('%d-%m-%Y')
     dates['yesterday'] = yesterday.strftime('%d-%m-%Y')
     return dates
@@ -40,7 +41,7 @@ def get_monthly():
 def get_yearly():
     dates = {}
     today = datetime.now()
-    yesterday = datetime.now() - timedelta(365)
+    yesterday = datetime.now() - relativedelta(years=1)
     dates['today'] = today.strftime('%d-%m-%Y')
     dates['yesterday'] = yesterday.strftime('%d-%m-%Y')
     return dates
