@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import json
 import requests
+import pandas as pd
 
 def prompt():
     result = {}
@@ -13,8 +14,8 @@ def prompt():
     time_view = input("Enter time series view: ")
     result['time_view'] = time_view
 
-    # options are [cases, mortality]
-    stats = input("Enter to view cases/deaths: ")
+    # options are [cases, mortality, recovered, testing, active]
+    stats = input("Enter statistic to view: ")
     result['stats'] = stats
     return result
 
@@ -63,11 +64,47 @@ def get_request(province, dates, stats):
     # DD - MM - YYYY
     response = requests.request("GET", URL)
     json_data = json.loads(response.text)
+    #print(json_data.get("cases")[0])
+    
+    print(pd.DataFrame(json_data.values()))
+    #df = pd.read_json(response.text)
+    #print(df)
 
     with open(f"sample_outputs/{province}_{first_date}to{second_date}_{stats}.json", "w") as f:
         json.dump(json_data, f, indent=4)
     return json_data
 
+def get_cases_from_data(json_data):
+    '''ONLY CAN BE USED IF STATS = "cases" '''
+    result = {}
+    inner = json_data.get("cases")
+    for each in inner:
+        result[each['date_report']] = each['cases']
+    return result
+
+def get_cumul_cases_from_data(json_data):
+    '''ONLY CAN BE USED IF STATS = "cases" '''
+    result = {}
+    inner = json_data.get("cases")
+    for each in inner:
+        result[each['date_report']] = each['cumulative_cases']
+    return result
+
+def get_deaths_from_data(json_data):
+    '''ONLY CAN BE USED IF STATS = "mortality" '''
+    result = {}
+    inner = json_data.get("mortality")
+    for each in inner:
+        result[each['date_death_report']] = each['deaths']
+    return result
+
+def get_cumul_deaths_from_data(json_data):
+    '''ONLY CAN BE USED IF STATS = "mortality" '''
+    result = {}
+    inner = json_data.get("mortality")
+    for each in inner:
+        result[each['date_death_report']] = each['cumulative_deaths']
+    return result
 
 def main():
     result = prompt()
@@ -77,13 +114,11 @@ def main():
 
     dates = calculate_date(time_view) # returns dictionary with today/yesterday as keys
 
-    results = get_request(province, dates, stats)
-    print(results)
-    try:
-        print(results["Summary"])
-        print("Success")
-    except:
-        print("ERROR!")
-    
+    json_data = get_request(province, dates, stats)
+    #print(json_data)
+    print(get_cases_from_data(json_data))
+
+    print("Success")
+
 if __name__ == '__main__':
     main()
