@@ -111,10 +111,9 @@ def main():
     json_data = get_request(province, dates, stats)
     #print(json_data)
     if stats == "cases":
-        pass
-    elif stats == "morality":
-        pass
-    print(get_cases_from_data(json_data))
+        print(get_cases_from_data(json_data))
+    elif stats == "mortality":
+        print(get_deaths_from_data(json_data))
 
     print("Success")
 
