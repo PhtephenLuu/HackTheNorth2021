@@ -1,0 +1,46 @@
+{
+    "cases": [
+        {
+            "cases": 3717,
+            "cumulative_cases": 216617,
+            "date_report": "09-01-2021",
+            "province": "Ontario"
+        },
+        {
+            "cases": 3328,
+            "cumulative_cases": 219945,
+            "date_report": "10-01-2021",
+            "province": "Ontario"
+        },
+        {
+            "cases": 4021,
+            "cumulative_cases": 223966,
+            "date_report": "11-01-2021",
+            "province": "Ontario"
+        },
+        {
+            "cases": 2692,
+            "cumulative_cases": 226658,
+            "date_report": "12-01-2021",
+            "province": "Ontario"
+        },
+        {
+            "cases": 3293,
+            "cumulative_cases": 229951,
+            "date_report": "13-01-2021",
+            "province": "Ontario"
+        },
+        {
+            "cases": 3242,
+            "cumulative_cases": 233193,
+            "date_report": "14-01-2021",
+            "province": "Ontario"
+        },
+        {
+            "cases": 3096,
+            "cumulative_cases": 236289,
+            "date_report": "15-01-2021",
+            "province": "Ontario"
+        }
+    ]
+}

@@ -55,14 +55,15 @@ def calculate_date(user_choice):
 
 def get_request(province, dates, stats):
     #dates = calculate_date()
-    before_date = dates['yesterday']
-    after_date = dates['today']
-    URL = f"https://api.opencovid.ca/timeseries?stat={stats}&loc={province}&before={before_date}&after={after_date}"
+    print(dates)
+    first_date = dates['yesterday']
+    second_date = dates['today']
+    URL = f"https://api.opencovid.ca/timeseries?stat={stats}&loc={province}&before={second_date}&after={first_date}"
     # DD - MM - YYYY
     response = requests.request("GET", URL)
     json_data = json.loads(response.text)
 
-    with open(f"sample_outputs/{province}_{before_date}to{after_date}_{stats}.json", "w") as f:
+    with open(f"sample_outputs/{province}_{first_date}to{second_date}_{stats}.json", "w") as f:
         json.dump(json_data, f, indent=4)
     return json_data
 
