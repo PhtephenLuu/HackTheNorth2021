@@ -93,7 +93,10 @@ def update_graph(prov_val, time_val, stats_val):
     elif STATS == 'mortality':
         df = get_deaths_from_data(json_data)  
         fig = px.line(df, x="date_death_report", y="deaths")
-    fig.update_layout(transition_duration=500)
+    fig.update_layout(
+    autosize=False,
+    width=800,
+    height=800,)
     return fig
 
 @app.callback(
