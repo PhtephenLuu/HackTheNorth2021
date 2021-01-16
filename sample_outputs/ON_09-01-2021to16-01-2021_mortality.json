@@ -1,0 +1,46 @@
+{
+    "mortality": [
+        {
+            "cumulative_deaths": 5004,
+            "date_death_report": "09-01-2021",
+            "deaths": 45,
+            "province": "Ontario"
+        },
+        {
+            "cumulative_deaths": 5031,
+            "date_death_report": "10-01-2021",
+            "deaths": 27,
+            "province": "Ontario"
+        },
+        {
+            "cumulative_deaths": 5075,
+            "date_death_report": "11-01-2021",
+            "deaths": 44,
+            "province": "Ontario"
+        },
+        {
+            "cumulative_deaths": 5139,
+            "date_death_report": "12-01-2021",
+            "deaths": 64,
+            "province": "Ontario"
+        },
+        {
+            "cumulative_deaths": 5209,
+            "date_death_report": "13-01-2021",
+            "deaths": 70,
+            "province": "Ontario"
+        },
+        {
+            "cumulative_deaths": 5268,
+            "date_death_report": "14-01-2021",
+            "deaths": 59,
+            "province": "Ontario"
+        },
+        {
+            "cumulative_deaths": 5322,
+            "date_death_report": "15-01-2021",
+            "deaths": 54,
+            "province": "Ontario"
+        }
+    ]
+}
