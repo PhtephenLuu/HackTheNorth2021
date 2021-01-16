@@ -1,0 +1,184 @@
+{
+    "cases": [
+        {
+            "cases": 135,
+            "cumulative_cases": 44273,
+            "date_report": "01-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 140,
+            "cumulative_cases": 44413,
+            "date_report": "02-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 149,
+            "cumulative_cases": 44562,
+            "date_report": "03-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 127,
+            "cumulative_cases": 44689,
+            "date_report": "04-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 157,
+            "cumulative_cases": 44846,
+            "date_report": "05-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 126,
+            "cumulative_cases": 44972,
+            "date_report": "06-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 184,
+            "cumulative_cases": 45156,
+            "date_report": "07-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 242,
+            "cumulative_cases": 45398,
+            "date_report": "08-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 185,
+            "cumulative_cases": 45583,
+            "date_report": "09-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 163,
+            "cumulative_cases": 45746,
+            "date_report": "10-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 236,
+            "cumulative_cases": 45982,
+            "date_report": "11-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 183,
+            "cumulative_cases": 46165,
+            "date_report": "12-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 223,
+            "cumulative_cases": 46388,
+            "date_report": "13-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 377,
+            "cumulative_cases": 46765,
+            "date_report": "14-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 255,
+            "cumulative_cases": 47020,
+            "date_report": "15-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 326,
+            "cumulative_cases": 47346,
+            "date_report": "16-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 339,
+            "cumulative_cases": 47685,
+            "date_report": "17-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 399,
+            "cumulative_cases": 48084,
+            "date_report": "18-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 380,
+            "cumulative_cases": 48464,
+            "date_report": "19-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 290,
+            "cumulative_cases": 48754,
+            "date_report": "20-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 514,
+            "cumulative_cases": 49268,
+            "date_report": "21-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 518,
+            "cumulative_cases": 49786,
+            "date_report": "22-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 344,
+            "cumulative_cases": 50130,
+            "date_report": "23-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 394,
+            "cumulative_cases": 50524,
+            "date_report": "24-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 498,
+            "cumulative_cases": 51022,
+            "date_report": "25-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 464,
+            "cumulative_cases": 51486,
+            "date_report": "26-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 448,
+            "cumulative_cases": 51934,
+            "date_report": "27-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 767,
+            "cumulative_cases": 52701,
+            "date_report": "28-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 563,
+            "cumulative_cases": 53264,
+            "date_report": "29-09-2020",
+            "province": "Ontario"
+        },
+        {
+            "cases": 644,
+            "cumulative_cases": 53908,
+            "date_report": "30-09-2020",
+            "province": "Ontario"
+        }
+    ]
+}
