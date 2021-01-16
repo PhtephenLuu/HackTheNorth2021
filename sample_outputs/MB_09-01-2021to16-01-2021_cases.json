@@ -1,0 +1,46 @@
+{
+    "cases": [
+        {
+            "cases": 203,
+            "cumulative_cases": 26166,
+            "date_report": "09-01-2021",
+            "province": "Manitoba"
+        },
+        {
+            "cases": 151,
+            "cumulative_cases": 26317,
+            "date_report": "10-01-2021",
+            "province": "Manitoba"
+        },
+        {
+            "cases": 131,
+            "cumulative_cases": 26448,
+            "date_report": "11-01-2021",
+            "province": "Manitoba"
+        },
+        {
+            "cases": 89,
+            "cumulative_cases": 26537,
+            "date_report": "12-01-2021",
+            "province": "Manitoba"
+        },
+        {
+            "cases": 156,
+            "cumulative_cases": 26693,
+            "date_report": "13-01-2021",
+            "province": "Manitoba"
+        },
+        {
+            "cases": 261,
+            "cumulative_cases": 26954,
+            "date_report": "14-01-2021",
+            "province": "Manitoba"
+        },
+        {
+            "cases": 191,
+            "cumulative_cases": 27145,
+            "date_report": "15-01-2021",
+            "province": "Manitoba"
+        }
+    ]
+}
