@@ -110,15 +110,14 @@ def main():
     dates = calculate_date(time_view) # returns dictionary with today/yesterday as keys
 
     json_data = get_request(province, dates, stats)
-    #print(json_data)
     
     if stats == "cases":
         dict_data = get_cases_from_data(json_data)
-        df = pd.DataFrame(dict_data.items())
+        df = pd.DataFrame(dict_data.items(), columns=["date", "cases"])
         print(df)
     elif stats == "mortality":
         dict_data = get_deaths_from_data(json_data)
-        df = pd.DataFrame(dict_data.items())
+        df = pd.DataFrame(dict_data.items(), columns=["date", "deaths"])
         print(df)
 
     print("Success")
