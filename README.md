@@ -1,6 +1,6 @@
 # HackTheNorth2021
 
-Hello welcome to our groups project made during HackTheNorth2021, our project is a Covid data visualizer based on data from the API [https://opencovid.ca/api/](https://opencovid.ca/api/)
+Hello welcome to our groups project made during HackTheNorth2021, our project is a Covid data visualizer based on data from the API [https://opencovid.ca/api/](https://opencovid.ca/api/) displayed using the dash library. 
 
 ## Installation
 First navigate to the folder where you cloned the repository and then install all the packages via pip
