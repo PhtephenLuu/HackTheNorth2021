@@ -17,8 +17,12 @@ df = get_cases_from_data(json_data)
 fig = px.line(df, x="date", y="cases")
 
 app.layout = html.Div([
+    html.Div([
+    html.H2('COVID-19 Data Visualization of Canada'),
+    ],className="banner"),
     dcc.Dropdown(
         id='province-dropdown',
+        className='dropdowns',
         options=[
             {'label': 'Alberta', 'value': 'AB'},
             {'label': 'British Columbia', 'value': 'BC'},
@@ -39,6 +43,7 @@ app.layout = html.Div([
     ),
     dcc.Dropdown(
         id='time-dropdown',
+        className='dropdowns',
         options=[
             {'label': 'Past Week', 'value': 'weekly'},
             {'label': 'Past Month', 'value': 'monthly'},
@@ -48,6 +53,7 @@ app.layout = html.Div([
         value="weekly"
     ),dcc.Dropdown(
         id='stats-dropdown',
+        className='dropdowns',
         options=[
             {'label': 'Cases', 'value': 'cases'},
             {'label': 'Deaths', 'value': 'mortality'}
