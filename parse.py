@@ -6,7 +6,7 @@ import pandas as pd
 def prompt():
     result = {}
     # options are ["AB", "BC", "MB", "NB", "NL", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT"]
-    province = input("Enter province code: ").lower()
+    province = input("Enter province code: ")
     result['province'] = province
 
     # options are Weekly, Monthly, Yearly
@@ -63,6 +63,7 @@ def get_request(province, dates, stats):
     # DD - MM - YYYY
     response = requests.request("GET", URL)
     json_data = json.loads(response.text)
+    print(json_data)
     
     with open(f"sample_outputs/{province}_{first_date}to{second_date}_{stats}.json", "w") as f:
         json.dump(json_data, f, indent=4)
@@ -110,10 +111,15 @@ def main():
 
     json_data = get_request(province, dates, stats)
     #print(json_data)
+    
     if stats == "cases":
-        print(get_cases_from_data(json_data))
+        dict_data = get_cases_from_data(json_data)
+        df = pd.DataFrame(dict_data.items())
+        print(df)
     elif stats == "mortality":
-        print(get_deaths_from_data(json_data))
+        dict_data = get_deaths_from_data(json_data)
+        df = pd.DataFrame(dict_data.items())
+        print(df)
 
     print("Success")
 
