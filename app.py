@@ -2,13 +2,16 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-from parse import get_request, get_cases_from_data
+from parse import *
 import plotly.express as px
-import pandas as pd
 
 app = dash.Dash()
 
-json_data = get_request("ON", {'today': '16-01-2021', 'yesterday': '01-07-2020'}, "cases")
+PROVINCE = "ON"
+DATES = get_weekly()
+STATS = "cases"
+
+json_data = get_request(PROVINCE, DATES, STATS)
 df = get_cases_from_data(json_data)
 
 fig = px.line(df, x="date", y="cases")
@@ -32,15 +35,17 @@ app.layout = html.Div([
             {'label': 'Yukon', 'value': 'YT'}
         ],
         placeholder="Select a province:",
+        value="ON"
     ),
     dcc.Dropdown(
         id='time-dropdown',
         options=[
-            {'label': 'Weekly', 'value': 'weekly'},
-            {'label': 'Monthly', 'value': 'monthly'},
-            {'label': 'Yearly', 'value': 'yearly'}
+            {'label': 'Past Week', 'value': 'weekly'},
+            {'label': 'Past Month', 'value': 'monthly'},
+            {'label': 'Past Year', 'value': 'yearly'}
         ],
         placeholder="Select a timeframe:",
+        value="weekly"
     ),dcc.Dropdown(
         id='stats-dropdown',
         options=[
@@ -48,6 +53,7 @@ app.layout = html.Div([
             {'label': 'Deaths', 'value': 'mortality'}
         ],
         placeholder="Select a statistic:",
+        value="cases"
     ),
     html.Div(id='dd-province-output-container'),
     html.Div(id='dd-time-output-container'),
@@ -63,7 +69,20 @@ app.layout = html.Div([
     [Input('province-dropdown', 'value')])
 def update_province_output(value):
     return f"Province selected: {value}"
+'''
+@app.callback(
+    Output('mapbox', 'figure'),
+    [Input('province-dropdown', 'value')]
+)
+def update_province_graph(value):
+    PROVINCE = value
+    json_data = get_request(PROVINCE, DATES, STATS)
+    df = get_cases_from_data(json_data)
 
+    fig = px.line(df, x="date", y="cases")
+    fig.update_layout(transition_duration=500)
+    return fig
+'''
 @app.callback(
     Output('dd-time-output-container', 'children'),
     [Input('time-dropdown', 'value')])
@@ -71,11 +90,37 @@ def update_time_output(value):
     return f"Timeframe selected: {value}"
 
 @app.callback(
+    Output('mapbox', 'figure'),
+    [Input('time-dropdown', 'value')]
+)
+def update_time_graph(value):
+    DATES = calculate_date(value)
+    json_data = get_request(PROVINCE, DATES, STATS)
+    df = get_cases_from_data(json_data)
+
+    fig = px.line(df, x="date", y="cases")
+    fig.update_layout(transition_duration=500)
+    return fig
+
+@app.callback(
     Output('dd-stats-output-container', 'children'),
     [Input('stats-dropdown', 'value')])
 def update_stats_output(value):
     return f"Statistic selected: {value}"
+'''
+@app.callback(
+    Output('mapbox', 'figure'),
+    [Input('stats-dropdown', 'value')]
+)
+def update_stats_graph(value):
+    STATS = value
+    json_data = get_request(PROVINCE, DATES, STATS)
+    df = get_cases_from_data(json_data)
 
+    fig = px.line(df, x="date", y="cases")
+    fig.update_layout(transition_duration=500)
+    return fig
+'''
 
 if __name__ == "__main__":
     app.run_server(debug=True)

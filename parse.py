@@ -56,7 +56,7 @@ def calculate_date(user_choice):
         raise Exception
     return date
 
-def get_request(province, dates, stats):
+def get_request(province="MB", dates=get_weekly(), stats="cases"):
     first_date = dates['yesterday']
     second_date = dates['today']
     URL = f"https://api.opencovid.ca/timeseries?stat={stats}&loc={province}&before={second_date}&after={first_date}"
