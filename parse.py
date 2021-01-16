@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import json
 import requests
+import pandas as pd
 
 def prompt():
     result = {}
@@ -62,6 +63,10 @@ def get_request(province, dates, stats):
     # DD - MM - YYYY
     response = requests.request("GET", URL)
     json_data = json.loads(response.text)
+    print(json_data)
+    #df = pd.json_normalize(json_data)
+    df = pd.read_json(response.text)
+    print(df)
 
     with open(f"sample_outputs/{province}_{first_date}to{second_date}_{stats}.json", "w") as f:
         json.dump(json_data, f, indent=4)
