@@ -4,6 +4,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 from parse import *
 import plotly.express as px
+import plotly.graph_objects as go
 
 app = dash.Dash()
 
@@ -11,10 +12,11 @@ PROVINCE = "ON"
 DATES = get_weekly()
 STATS = "cases"
 
-json_data = get_request(PROVINCE, DATES, STATS)
-df = get_cases_from_data(json_data)
+#json_data = get_request(PROVINCE, DATES, STATS)
+df = get_all_info(PROVINCE, DATES)
 
-fig = px.line(df, x="date", y="cases")
+fig = px.line(df, x="date", y="count", color="topic", line_group="topic")
+
 
 app.layout = html.Div([
     html.Div([
@@ -108,13 +110,10 @@ def update_graph(prov_val, time_val, stats_val):
     PROVINCE = prov_val
     DATES = calculate_date(time_val)
     STATS = stats_val
-    json_data = get_request(PROVINCE, DATES, STATS)
-    if STATS == 'cases':
-        df = get_cases_from_data(json_data)
-        fig = px.line(df, x="date", y="cases")
-    elif STATS == 'mortality':
-        df = get_deaths_from_data(json_data)
-        fig = px.line(df, x="date_death_report", y="deaths")
+    #json_data = get_request(PROVINCE, DATES, STATS)
+    
+    df = get_all_info(PROVINCE, DATES)
+    fig = px.line(df, x="date", y="count", color="topic", line_group="topic")
     fig.update_layout(
         autosize=False,
         width=1000,
