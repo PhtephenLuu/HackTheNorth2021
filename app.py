@@ -8,7 +8,6 @@ app = dash.Dash()
 app.layout = html.Div([
     dcc.Dropdown(
         id='province-dropdown',
-        # AB", "BC", "MB", "NB", "NL", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT
         options=[
             {'label': 'Alberta', 'value': 'AB'},
             {'label': 'British Columbia', 'value': 'BC'},
