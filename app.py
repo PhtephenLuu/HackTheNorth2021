@@ -80,19 +80,9 @@ app.layout = html.Div([
     html.Div(id='dd-province-output-container',
              className='info-display'),
     html.Div(id='dd-time-output-container',
-<<<<<<< HEAD
-<<<<<<< HEAD
-    className='info-display'),
-=======
              className='info-display'),
     html.Div(id='dd-stats-output-container',
              className='info-display'),
->>>>>>> c41b4a35c7653569ddce34eb8c2143008e51f604
-=======
-             className='info-display'),
-    html.Div(id='dd-stats-output-container',
-             className='info-display'),
->>>>>>> c41b4a35c7653569ddce34eb8c2143008e51f604
     dcc.Graph(
         id='mapbox',
         figure=fig
@@ -123,10 +113,6 @@ def update_time_output(value):
 def update_graph(prov_val, time_val):
     PROVINCE = prov_val
     DATES = calculate_date(time_val)
-<<<<<<< HEAD
-=======
-    STATS = stats_val
->>>>>>> c41b4a35c7653569ddce34eb8c2143008e51f604
     #json_data = get_request(PROVINCE, DATES, STATS)
     
     df = get_all_info(PROVINCE, DATES)
@@ -137,17 +123,6 @@ def update_graph(prov_val, time_val):
         height=500,
     )
     return fig
-
-<<<<<<< HEAD
-=======
-
-@app.callback(
-    Output('dd-stats-output-container', 'children'),
-    [Input('stats-dropdown', 'value')])
-def update_stats_output(value):
-    return f"Statistic selected: {value}"
-
->>>>>>> c41b4a35c7653569ddce34eb8c2143008e51f604
 
 if __name__ == "__main__":
     app.run_server(debug=True)
