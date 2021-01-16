@@ -97,7 +97,7 @@ def update_graph(prov_val, time_val, stats_val):
     autosize=False,
     width=1000,
     height=500,
-    transition_duration=500)
+    )
     return fig
 
 @app.callback(
