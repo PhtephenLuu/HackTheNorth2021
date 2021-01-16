@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 import json
 import requests
 
@@ -21,7 +22,7 @@ def prompt():
 def get_weekly():
     dates = {}
     today = datetime.now()
-    yesterday = datetime.now() - timedelta(7)
+    yesterday = datetime.now() - relativedelta(weeks=1)
     dates['today'] = today.strftime('%d-%m-%Y')
     dates['yesterday'] = yesterday.strftime('%d-%m-%Y')
     return dates
@@ -29,15 +30,15 @@ def get_weekly():
 def get_monthly():
     dates = {}
     today = datetime.now()
-    yesterday = datetime.now() - timedelta(30)
+    last_month = datetime.now() - relativedelta(months=1)
     dates['today'] = today.strftime('%d-%m-%Y')
-    dates['yesterday'] = yesterday.strftime('%d-%m-%Y')
+    dates['yesterday'] = last_month.strftime('%d-%m-%Y')
     return dates
 
 def get_yearly():
     dates = {}
     today = datetime.now()
-    yesterday = datetime.now() - timedelta(365)
+    yesterday = datetime.now() - relativedelta(years=1)
     dates['today'] = today.strftime('%d-%m-%Y')
     dates['yesterday'] = yesterday.strftime('%d-%m-%Y')
     return dates
@@ -76,8 +77,13 @@ def main():
 
     dates = calculate_date(time_view) # returns dictionary with today/yesterday as keys
 
-    get_request(province, dates, stats)
-    print("Success")
-
+    results = get_request(province, dates, stats)
+    print(results)
+    try:
+        print(results["Summary"])
+        print("Success")
+    except:
+        print("ERROR!")
+    
 if __name__ == '__main__':
     main()

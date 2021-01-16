@@ -44,6 +44,7 @@ app.layout = html.Div([
     html.Div(id='dd-province-output-container'),
     html.Div(id='dd-time-output-container'),
     html.Div(id='dd-stats-output-container'),
+    dcc.Graph(id='graph')
 ])
 
 @app.callback(
