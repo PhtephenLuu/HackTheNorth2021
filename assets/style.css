@@ -1,0 +1,56 @@
+* {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.about {
+  margin-left: 5rem;
+}
+
+.checklist-container {
+  margin-left: 5rem;
+  margin-bottom: 2rem;
+}
+
+.dropdown-info {
+  width: 25%;
+}
+
+.dropdowns {
+  width: 25%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5rem;
+}
+
+.info-display {
+  margin-left: 5rem;
+}
+
+.banner {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 80px;
+  background: rgb(156, 151, 151);
+  padding: 0;
+  margin: 0;
+  padding-left: 4rem;
+}
+
+.banner h2 {
+  padding-left: 15px;
+  padding-top: 25px;
+}
+
+.resize {
+  position: absolute;
+  top: 25px;
+  left: 540px;
+  height: 70px;
+  width: auto;
+}
+
+#graph {
+  width: 60%;
+  margin-top: 0%;
+  float: right;
+}
