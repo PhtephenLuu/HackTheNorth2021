@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-from dateutil.relativedelta import relativedelta
 import json
 import requests
 import pandas as pd
@@ -11,11 +10,11 @@ def prompt():
     result['province'] = province
 
     # options are Weekly, Monthly, Yearly
-    time_view = input("Enter time series view: ").lower()
+    time_view = input("Enter time series view: ")
     result['time_view'] = time_view
 
     # options are [cases, mortality, recovered, testing, active]
-    stats = input("Enter statistic to view: ").lower()
+    stats = input("Enter statistic to view: ")
     result['stats'] = stats
     return result
 
@@ -23,7 +22,7 @@ def prompt():
 def get_weekly():
     dates = {}
     today = datetime.now()
-    yesterday = datetime.now() - relativedelta(weeks=1)
+    yesterday = datetime.now() - timedelta(7)
     dates['today'] = today.strftime('%d-%m-%Y')
     dates['yesterday'] = yesterday.strftime('%d-%m-%Y')
     return dates
@@ -31,15 +30,15 @@ def get_weekly():
 def get_monthly():
     dates = {}
     today = datetime.now()
-    last_month = datetime.now() - relativedelta(months=1)
+    yesterday = datetime.now() - timedelta(30)
     dates['today'] = today.strftime('%d-%m-%Y')
-    dates['yesterday'] = last_month.strftime('%d-%m-%Y')
+    dates['yesterday'] = yesterday.strftime('%d-%m-%Y')
     return dates
 
 def get_yearly():
     dates = {}
     today = datetime.now()
-    yesterday = datetime.now() - relativedelta(years=1)
+    yesterday = datetime.now() - timedelta(365)
     dates['today'] = today.strftime('%d-%m-%Y')
     dates['yesterday'] = yesterday.strftime('%d-%m-%Y')
     return dates
@@ -64,6 +63,11 @@ def get_request(province, dates, stats):
     # DD - MM - YYYY
     response = requests.request("GET", URL)
     json_data = json.loads(response.text)
+    #print(json_data.get("cases")[0])
+    
+    print(pd.DataFrame(json_data.values()))
+    #df = pd.read_json(response.text)
+    #print(df)
 
     with open(f"sample_outputs/{province}_{first_date}to{second_date}_{stats}.json", "w") as f:
         json.dump(json_data, f, indent=4)
@@ -111,10 +115,12 @@ def main():
 
     json_data = get_request(province, dates, stats)
     #print(json_data)
+    if stats == "cases":
+        pass
+    elif stats == "morality":
+        pass
     print(get_cases_from_data(json_data))
-    dict_data = get_cases_from_data(json_data)
-    df = pd.DataFrame(dict_data.items())
-    print(df)
+
     print("Success")
 
 if __name__ == '__main__':
