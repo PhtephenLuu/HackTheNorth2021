@@ -10,11 +10,11 @@ def prompt():
     result['province'] = province
 
     # options are Weekly, Monthly, Yearly
-    time_view = input("Enter time series view: ")
+    time_view = input("Enter time series view: ").lower()
     result['time_view'] = time_view
 
     # options are [cases, mortality, recovered, testing, active]
-    stats = input("Enter statistic to view: ")
+    stats = input("Enter statistic to view: ").lower()
     result['stats'] = stats
     return result
 
@@ -63,11 +63,6 @@ def get_request(province, dates, stats):
     # DD - MM - YYYY
     response = requests.request("GET", URL)
     json_data = json.loads(response.text)
-    #print(json_data.get("cases")[0])
-    
-    print(pd.DataFrame(json_data.values()))
-    #df = pd.read_json(response.text)
-    #print(df)
 
     with open(f"sample_outputs/{province}_{first_date}to{second_date}_{stats}.json", "w") as f:
         json.dump(json_data, f, indent=4)
@@ -116,7 +111,9 @@ def main():
     json_data = get_request(province, dates, stats)
     #print(json_data)
     print(get_cases_from_data(json_data))
-
+    dict_data = get_cases_from_data(json_data)
+    df = pd.DataFrame(dict_data.items())
+    print(df)
     print("Success")
 
 if __name__ == '__main__':
