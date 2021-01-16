@@ -22,7 +22,7 @@ app.layout = html.Div([
     ], className="banner"),
 
     html.Div([
-        html.H4('Fill in the boxes below'),
+        html.H4('Fill in the boxes below:'),
     ], className="about"),
 
     dcc.Dropdown(
@@ -66,9 +66,12 @@ app.layout = html.Div([
         placeholder="Select a statistic:",
         value="cases"
     ),
-    html.Div(id='dd-province-output-container'),
-    html.Div(id='dd-time-output-container'),
-    html.Div(id='dd-stats-output-container'),
+    html.Div(id='dd-province-output-container',
+    className='info-display'),
+    html.Div(id='dd-time-output-container',
+    className='info-display'),
+    html.Div(id='dd-stats-output-container',
+    className='info-display'),
     dcc.Graph(
         id='mapbox',
         figure=fig
