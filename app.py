@@ -4,6 +4,7 @@ import dash_html_components as html
 
 app = dash.Dash()
 
+
 app.layout = html.Div([
     dcc.Dropdown(
         id='province-dropdown',
@@ -23,17 +24,46 @@ app.layout = html.Div([
             {'label': 'Saskatchewan', 'value': 'SK'},
             {'label': 'Yukon', 'value': 'YT'}
         ],
-        placeholder="Select a province",
+        placeholder="Select a province:",
     ),
-    html.Div(id='dd-output-container')
+    dcc.Dropdown(
+        id='time-dropdown',
+        options=[
+            {'label': 'Weekly', 'value': 'weekly'},
+            {'label': 'Monthly', 'value': 'monthly'},
+            {'label': 'Yearly', 'value': 'yearly'}
+        ],
+        placeholder="Select a timeframe:",
+    ),dcc.Dropdown(
+        id='stats-dropdown',
+        options=[
+            {'label': 'Cases', 'value': 'cases'},
+            {'label': 'Deaths', 'value': 'mortality'}
+        ],
+        placeholder="Select a statistic:",
+    ),
+    html.Div(id='dd-province-output-container'),
+    html.Div(id='dd-time-output-container'),
+    html.Div(id='dd-stats-output-container'),
 ])
 
 @app.callback(
-    dash.dependencies.Output('dd-output-container', 'children'),
+    dash.dependencies.Output('dd-province-output-container', 'children'),
     [dash.dependencies.Input('province-dropdown', 'value')])
+def update_province_output(value):
+    return f"Province selected: {value}"
 
-def update_output(value):
-    return 'You have selected "{}"'.format(value)
+@app.callback(
+    dash.dependencies.Output('dd-time-output-container', 'children'),
+    [dash.dependencies.Input('time-dropdown', 'value')])
+def update_time_output(value):
+    return f"Timeframe selected: {value}"
+
+@app.callback(
+    dash.dependencies.Output('dd-stats-output-container', 'children'),
+    [dash.dependencies.Input('stats-dropdown', 'value')])
+def update_stats_output(value):
+    return f"Statistic selected: {value}"
 
 if __name__ == "__main__":
     app.run_server(debug=True)
