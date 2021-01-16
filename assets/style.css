@@ -36,6 +36,14 @@
   padding-top: 25px;
 }
 
+.resize {
+  position: absolute;
+  top: 25px;
+  left: 570px;
+  height: 70px;
+  width: auto;
+}
+
 #graph {
   width: 60%;
   margin-top: 0%;

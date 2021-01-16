@@ -19,7 +19,11 @@ fig = px.line(df, x="date", y="cases")
 app.layout = html.Div([
     html.Div([
         html.H2('COVID-19 Data Visualization of Canada'),
+
     ], className="banner"),
+
+    html.Img(
+        src=app.get_asset_url('virus-logo.png'), className="resize",),
 
     html.Div([
         html.H4('Fill in the boxes below:'),
@@ -67,11 +71,11 @@ app.layout = html.Div([
         value="cases"
     ),
     html.Div(id='dd-province-output-container',
-    className='info-display'),
+             className='info-display'),
     html.Div(id='dd-time-output-container',
-    className='info-display'),
+             className='info-display'),
     html.Div(id='dd-stats-output-container',
-    className='info-display'),
+             className='info-display'),
     dcc.Graph(
         id='mapbox',
         figure=fig
@@ -80,21 +84,21 @@ app.layout = html.Div([
 ])
 
 
-@app.callback(
+@ app.callback(
     Output('dd-province-output-container', 'children'),
     [Input('province-dropdown', 'value')])
 def update_province_output(value):
     return f"Province selected: {value}"
 
 
-@app.callback(
+@ app.callback(
     Output('dd-time-output-container', 'children'),
     [Input('time-dropdown', 'value')])
 def update_time_output(value):
     return f"Timeframe selected: {value}"
 
 
-@app.callback(
+@ app.callback(
     Output('mapbox', 'figure'),
     Input('province-dropdown', 'value'),
     Input('time-dropdown', 'value'),
