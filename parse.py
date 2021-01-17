@@ -82,7 +82,7 @@ def get_all_info(province="MB", dates=get_weekly()):
     cases_inner = cases_info.get("cases")
     for each in cases_inner:
         current_date = each['date_report']
-        current_cases = each['cases']
+        current_cases = abs(each['cases'])
         result['date'].append(current_date)
         result['topic'].append('cases')
         result['count'].append(current_cases)
@@ -90,7 +90,7 @@ def get_all_info(province="MB", dates=get_weekly()):
     deaths_inner = deaths_info.get("mortality")
     for each in deaths_inner:
         current_date = each['date_death_report']
-        current_deaths = each['deaths']
+        current_deaths = abs(each['deaths'])
         result['date'].append(current_date)
         result['topic'].append('deaths')
         result['count'].append(current_deaths)
@@ -98,26 +98,28 @@ def get_all_info(province="MB", dates=get_weekly()):
     recovered_inner = recovered_info.get("recovered")
     for each in recovered_inner:
         current_date = each['date_recovered']
-        current_deaths = each['recovered']
+        current_recovered = abs(each['recovered'])
         result['date'].append(current_date)
         result['topic'].append('recovered')
-        result['count'].append(current_deaths)
+        result['count'].append(current_recovered)
 
     testing_inner = testing_info.get("testing")
     for each in testing_inner:
         current_date = each['date_testing']
-        current_deaths = each['testing']
+        current_testing = abs(each['testing'])
+        if current_testing > 150000: #handles Alberta testing anomaly
+            current_testing /= 10
         result['date'].append(current_date)
         result['topic'].append('testing')
-        result['count'].append(current_deaths)
+        result['count'].append(current_testing)
 
     active_inner = active_info.get("active")
     for each in active_inner:
         current_date = each['date_active']
-        current_deaths = each['active_cases']
+        current_active = abs(each['active_cases'])
         result['date'].append(current_date)
         result['topic'].append('active_cases')
-        result['count'].append(current_deaths)     
+        result['count'].append(current_active)     
     
     return result
 
