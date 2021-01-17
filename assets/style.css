@@ -32,13 +32,13 @@
   position: absolute;
   width: 40%;
   margin-left: 460px;
-  top: 167px;
+  top: 137px;
 }
 #dd-time-output-container {
   position: absolute;
   width: 40%;
   margin-left: 460px;
-  top: 214px;
+  top: 184px;
 }
 #dd-stats-output-container {
   position: absolute;
@@ -71,7 +71,7 @@
 
 .resize {
   position: absolute;
-  top: 25px;
+  top: 0px;
   left: 540px;
   height: 70px;
   width: auto;
@@ -99,6 +99,7 @@
 
 .resize2 {
   position: absolute;
+  top: 0px;
   right: 230px;
   width: 85px;
   height: auto;
