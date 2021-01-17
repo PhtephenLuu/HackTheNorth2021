@@ -68,8 +68,6 @@ def get_request(province="MB", dates=get_weekly(), stats="cases"):
 def get_all_info(province="MB", dates=get_weekly(), stats=['cases']):
     '''returns dataframe with ALL info'''
     stat_dict = {}
-
-    # {"cases": cases_info, "deaths: deaths_info"}
     for stat in stats:
         stat_dict[stat] = get_request(province, dates, stat)
 
@@ -137,41 +135,44 @@ def get_all_info(province="MB", dates=get_weekly(), stats=['cases']):
     return result
 
 
-def get_all_cumulative_info(province="MB", dates=get_weekly()):
+def get_all_cumulative_info(province="MB", dates=get_weekly(), stats=['cases']):
     '''returns dataframe with ALL info'''
-    cases_info = get_request(province, dates, "cases")
-    deaths_info = get_request(province, dates, "mortality")
-    recovered_info = get_request(province, dates, "recovered")
-    testing_info = get_request(province, dates, "testing")
-    active_info = get_request(province, dates, "active")
+    stat_dict = {}
+    for stat in stats:
+        stat_dict[stat] = get_request(province, dates, stat)
 
     # {topic: [cases -> active], 'count: [total_cases -> total_active]}
     # {cases: total_cases, deaths: total_deaths, .....}
     
     result = {}
-    result['topic'] = ['cases', 'deaths', 'recovered', 'testing', 'active']
-    result['count'] = [0, 0, 0, 0, 0]
+    result['topic'] = stats
+    result['count'] = [0] * len(stats)
 
-    inner_cases = cases_info.get('cases')
-    for each in inner_cases:
-        result['count'][0] += int(each['cases'])
+    if 'cases' in stat_dict:
+        inner_cases = stat_dict['cases'].get('cases')
+        for each in inner_cases:
+            result['count'][stats.index('cases')] += int(each['cases'])
     
-    inner_deaths = deaths_info.get("mortality")
-    for each in inner_deaths:
-        result['count'][1] += int(each['deaths'])
+    if 'mortality' in stat_dict:
+        inner_deaths = stat_dict['mortality'].get("mortality")
+        for each in inner_deaths:
+            result['count'][stats.index('mortality')] += int(each['deaths'])
 
-    inner_recovered = recovered_info.get("recovered")
-    for each in inner_recovered:
-        result['count'][2] += int(each['recovered'])
+    if 'recovered' in stat_dict:
+        inner_recovered = stat_dict['recovered'].get("recovered")
+        for each in inner_recovered:
+            result['count'][stats.index('recovered')] += int(each['recovered'])
 
-    inner_testing = testing_info.get("testing")
-    for each in inner_testing:
-        result['count'][3] += int(each['testing'])
+    if 'testing' in stat_dict:
+        inner_testing = stat_dict['testing'].get("testing")
+        for each in inner_testing:
+            result['count'][stats.index('testing')] += int(each['testing'])
 
-    inner_active = active_info.get("active")
-    for each in inner_active:
-        result['count'][4] += int(each['active_cases'])
-    print(result)
+    if 'active' in stat_dict:
+        inner_active = stat_dict['active'].get("active")
+        for each in inner_active:
+            result['count'][stats.index('active')] += int(each['active_cases'])
+
     return result
 
 

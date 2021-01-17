@@ -7,23 +7,23 @@ from whitenoise import Whitenoise
 import plotly.express as px
 import plotly.graph_objects as go
 
-server = app.server
-server.wsgi_app = WhiteNoise(server.wsgi_app, root=‘static/’)
 app = dash.Dash()
+server = app.server
+server.wsgi_app = WhiteNoise(server.wsgi_app, root='static/')
 
 PROVINCE = "ON"
 DATES = get_weekly()
 STATS = ["cases", "mortality", "recovered", "testing", "active"]
 
-get_all_cumulative_info(PROVINCE, DATES)
-
 
 # json_data = get_request(PROVINCE, DATES, STATS)
 df = get_all_info(PROVINCE, DATES, STATS)
-PROVINCE = get_prov_name(PROVINCE)
+TITLE_PROVINCE = get_prov_name(PROVINCE)
 fig = px.line(df, x="date", y="count", color="topic",
-              line_group="topic", title="Time-Series Data of {}".format(PROVINCE))
+              line_group="topic", title="Time-Series Data of {}".format(TITLE_PROVINCE))
 
+df2 = get_all_cumulative_info(PROVINCE, DATES, STATS)
+fig2 = px.bar(df2, x="topic", y="count")
 
 app.layout = html.Div([
     html.Div([
@@ -99,6 +99,10 @@ app.layout = html.Div([
         id="graph-container",
         children=dcc.Graph(id="graph", figure=fig),
     ),
+    html.Div(
+        id="bar-container",
+        children=dcc.Graph(id="graph2", figure=fig2),
+    )
 ])
 
 
@@ -142,6 +146,20 @@ def update_graph(prov_val, time_val, stats):
     )
     return fig
 
+@ app.callback (
+    Output('graph2', 'figure'),
+    Input('province-dropdown', 'value'),
+    Input('time-dropdown', 'value'),
+    Input('checklist', 'value')
+)
+def update_bars(prov_val, time_val, stats):
+    PROVINCE = prov_val
+    DATES = calculate_date(time_val)
+    stats.sort()
+
+    df2 = get_all_cumulative_info(PROVINCE, DATES, stats)
+    fig2 = px.bar(df2, x="topic", y="count")
+    return fig2
 
 if __name__ == "__main__":
     app.run_server(debug=True)
