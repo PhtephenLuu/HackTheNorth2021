@@ -17,11 +17,11 @@ STATS = ["cases", "mortality", "recovered", "testing", "active"]
 # json_data = get_request(PROVINCE, DATES, STATS)
 df = get_all_info(PROVINCE, DATES, STATS)
 TITLE_PROVINCE = get_prov_name(PROVINCE)
-fig = px.line(df, x="date", y="count", color="topic",
-              line_group="topic", title="Time-Series Data of {}".format(TITLE_PROVINCE))
+fig = px.line(df, x="Date", y="Count", color="Statistic",
+              line_group="Statistic", title="Time-Series Data of {}".format(TITLE_PROVINCE))
 
 df2 = get_all_cumulative_info(PROVINCE, DATES, STATS)
-fig2 = px.bar(df2, x="topic", y="count",
+fig2 = px.bar(df2, x="Statistic", y="Count",
               title="Cumulative Data of {}".format(TITLE_PROVINCE))
 
 app.layout = html.Div([
@@ -36,23 +36,26 @@ app.layout = html.Div([
     ], className="info-header"),
     html.Div([
     ], className="info-box"),
-
+    
+    #html.Div([
+        #html.H3('Multi-variable chart visualization',
+                #className="graph-header"),
+    #]),
+    #html.Div([
+        #html.H3('Multi-variable bar-graph visualization',
+                #className="bar-header"),
+    #]),
+    
     html.Div([
-        html.H3('Multi-variable chart visualization',
-                className="graph-header"),
-    ]),
-    html.Div([
-        html.H3('Multi-variable bar-graph visualization',
-                className="bar-header"),
-    ]),
-    html.Div([
-        html.H3('Input variables for dynamic output',
+        html.H3('Input Variables for Dynamic Output',
                 className="input-header"),
     ]),
-    html.Div([
-    ], className="bar-header-container"),
-    html.Div([
-    ], className="graph-header-container"),
+    
+    #html.Div([
+    #], className="bar-header-container"),
+    #html.Div([
+    #], className="graph-header-container"),
+    
     html.Div([
     ], className="input-header-container"),
     # html.Img(
@@ -129,14 +132,14 @@ app.layout = html.Div([
     Output('dd-province-output-container', 'children'),
     [Input('province-dropdown', 'value')])
 def update_province_output(value):
-    return f"Province selected: {value}"
+    return f"Province Selected: {value}"
 
 
 @ app.callback(
     Output('dd-time-output-container', 'children'),
     [Input('time-dropdown', 'value')])
 def update_time_output(value):
-    return f"Timeframe selected: {value}"
+    return f"Timeframe Selected: {value}"
 
 
 @ app.callback(
@@ -151,8 +154,8 @@ def update_graph(prov_val, time_val, stats):
     stats.sort()  # sorts list to maintain color
     df = get_all_info(PROVINCE, DATES, stats)
     PROVINCE = get_prov_name(PROVINCE)
-    fig = px.line(df, x="date", y="count", color="topic",
-                  line_group="topic", title="Time-Series Data of {}".format(PROVINCE))
+    fig = px.line(df, x="Date", y="Count", color="Statistic",
+                  line_group="Statistic", title="Time-Series Data of {}".format(PROVINCE))
     fig.update_layout(
         autosize=True,
         margin=dict(
@@ -179,7 +182,7 @@ def update_bars(prov_val, time_val, stats):
 
     df2 = get_all_cumulative_info(PROVINCE, DATES, stats)
     PROVINCE = get_prov_name(PROVINCE)
-    fig2 = px.bar(df2, x="topic", y="count",
+    fig2 = px.bar(df2, x="Statistic", y="Count",
                   title="Cumulative Data of {}".format(PROVINCE))
     fig2.update_layout(
         height=780,

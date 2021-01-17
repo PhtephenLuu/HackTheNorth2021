@@ -80,9 +80,9 @@ def get_all_info(province="MB", dates=get_weekly(), stats=['cases']):
     '''
 
     result = {}
-    result['date'] = []
-    result['topic'] = []
-    result['count'] = []
+    result['Date'] = []
+    result['Statistic'] = []
+    result['Count'] = []
 
     # starting iterating through dictionaries
     if 'cases' in stat_dict:
@@ -90,27 +90,27 @@ def get_all_info(province="MB", dates=get_weekly(), stats=['cases']):
         for each in cases_inner:
             current_date = each['date_report']
             current_cases = abs(each['cases'])
-            result['date'].append(current_date)
-            result['topic'].append('cases')
-            result['count'].append(current_cases)
+            result['Date'].append(current_date)
+            result['Statistic'].append('cases')
+            result['Count'].append(current_cases)
 
     if 'mortality' in stat_dict:
         deaths_inner = stat_dict['mortality'].get("mortality")
         for each in deaths_inner:
             current_date = each['date_death_report']
             current_deaths = abs(each['deaths'])
-            result['date'].append(current_date)
-            result['topic'].append('deaths')
-            result['count'].append(current_deaths)
+            result['Date'].append(current_date)
+            result['Statistic'].append('deaths')
+            result['Count'].append(current_deaths)
 
     if 'recovered' in stat_dict:
         recovered_inner = stat_dict['recovered'].get("recovered")
         for each in recovered_inner:
             current_date = each['date_recovered']
             current_recovered = abs(each['recovered'])
-            result['date'].append(current_date)
-            result['topic'].append('recovered')
-            result['count'].append(current_recovered)
+            result['Date'].append(current_date)
+            result['Statistic'].append('recovered')
+            result['Count'].append(current_recovered)
 
     if 'testing' in stat_dict:
         testing_inner = stat_dict['testing'].get("testing")
@@ -119,18 +119,18 @@ def get_all_info(province="MB", dates=get_weekly(), stats=['cases']):
             current_testing = abs(each['testing'])
             if current_testing > 150000: #handles Alberta testing anomaly
                 current_testing /= 10
-            result['date'].append(current_date)
-            result['topic'].append('testing')
-            result['count'].append(current_testing)
+            result['Date'].append(current_date)
+            result['Statistic'].append('testing')
+            result['Count'].append(current_testing)
 
     if 'active' in stat_dict:
         active_inner = stat_dict['active'].get("active")
         for each in active_inner:
             current_date = each['date_active']
             current_active = abs(each['active_cases'])
-            result['date'].append(current_date)
-            result['topic'].append('active_cases')
-            result['count'].append(current_active)     
+            result['Date'].append(current_date)
+            result['Statistic'].append('active_cases')
+            result['Count'].append(current_active)     
     
     return result
 
@@ -145,33 +145,33 @@ def get_all_cumulative_info(province="MB", dates=get_weekly(), stats=['cases']):
     # {cases: total_cases, deaths: total_deaths, .....}
     
     result = {}
-    result['topic'] = stats
-    result['count'] = [0] * len(stats)
+    result['Statistic'] = stats
+    result['Count'] = [0] * len(stats)
 
     if 'cases' in stat_dict:
         inner_cases = stat_dict['cases'].get('cases')
         for each in inner_cases:
-            result['count'][stats.index('cases')] += int(each['cases'])
+            result['Count'][stats.index('cases')] += int(each['cases'])
     
     if 'mortality' in stat_dict:
         inner_deaths = stat_dict['mortality'].get("mortality")
         for each in inner_deaths:
-            result['count'][stats.index('mortality')] += int(each['deaths'])
+            result['Count'][stats.index('mortality')] += int(each['deaths'])
 
     if 'recovered' in stat_dict:
         inner_recovered = stat_dict['recovered'].get("recovered")
         for each in inner_recovered:
-            result['count'][stats.index('recovered')] += int(each['recovered'])
+            result['Count'][stats.index('recovered')] += int(each['recovered'])
 
     if 'testing' in stat_dict:
         inner_testing = stat_dict['testing'].get("testing")
         for each in inner_testing:
-            result['count'][stats.index('testing')] += int(each['testing'])
+            result['Count'][stats.index('testing')] += int(each['testing'])
 
     if 'active' in stat_dict:
         inner_active = stat_dict['active'].get("active")
         for each in inner_active:
-            result['count'][stats.index('active')] += int(each['active_cases'])
+            result['Count'][stats.index('active')] += int(each['active_cases'])
 
     return result
 

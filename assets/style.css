@@ -6,8 +6,9 @@
 }
 
 .about {
+  position: relative;
   margin-left: 5rem;
-  margin-top: 20px;
+  margin-top: 80px;
   margin-bottom: 20px;
 }
 
@@ -170,7 +171,7 @@
   float: right;
   display: inline-block;
   position: absolute;
-  top: 110px;
+  top: 70px;
   width: 36%;
   right: 0px;
 }
@@ -179,7 +180,7 @@
   width: 53%;
   display: inline-block;
   position: relative;
-  top: 75px;
+  top: 45px;
   margin-left: 0px;
   float: left;
 }
@@ -223,3 +224,4 @@
     transform: rotate(360deg);
   }
 }
+
