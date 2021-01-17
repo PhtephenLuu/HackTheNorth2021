@@ -21,7 +21,8 @@ fig = px.line(df, x="date", y="count", color="topic",
               line_group="topic", title="Time-Series Data of {}".format(TITLE_PROVINCE))
 
 df2 = get_all_cumulative_info(PROVINCE, DATES, STATS)
-fig2 = px.bar(df2, x="topic", y="count", title="Cumulative Data of {}".format(TITLE_PROVINCE))
+fig2 = px.bar(df2, x="topic", y="count",
+              title="Cumulative Data of {}".format(TITLE_PROVINCE))
 
 app.layout = html.Div([
     html.Div([
@@ -32,8 +33,22 @@ app.layout = html.Div([
         html.H3('Case Overview'),
         # html.Img(
         # src=app.get_asset_url('virus-graphic.png'), className="resize2",),
+    ], className="info-header"),
+    html.Div([
     ], className="info-box"),
 
+    html.Div([
+        html.H3('Multi-variable chart visualization',
+                className="graph-header"),
+    ]),
+    html.Div([
+        html.H3('Multi-variable bar-graph visualization',
+                className="bar-header"),
+    ]),
+    html.Div([
+    ], className="bar-header-container"),
+    html.Div([
+    ], className="graph-header-container"),
     # html.Img(
     # src=app.get_asset_url('virus-logo.png'), className="resize",),
 
@@ -158,7 +173,8 @@ def update_bars(prov_val, time_val, stats):
 
     df2 = get_all_cumulative_info(PROVINCE, DATES, stats)
     PROVINCE = get_prov_name(PROVINCE)
-    fig2 = px.bar(df2, x="topic", y="count", title="Cumulative Data of {}".format(PROVINCE))
+    fig2 = px.bar(df2, x="topic", y="count",
+                  title="Cumulative Data of {}".format(PROVINCE))
     fig2.update_layout(
         height=700,
         title={
