@@ -21,7 +21,7 @@ fig = px.line(df, x="date", y="count", color="topic",
               line_group="topic", title="Time-Series Data of {}".format(TITLE_PROVINCE))
 
 df2 = get_all_cumulative_info(PROVINCE, DATES, STATS)
-fig2 = px.bar(df2, x="topic", y="count")
+fig2 = px.bar(df2, x="topic", y="count", title="Time-Series Data of {}".format(TITLE_PROVINCE))
 
 app.layout = html.Div([
     html.Div([
@@ -160,6 +160,10 @@ def update_bars(prov_val, time_val, stats):
     fig2 = px.bar(df2, x="topic", y="count")
     fig2.update_layout(
         height=700,
+        title={
+            'x': 0.5,
+            'xanchor': 'center'
+        }
     )
     return fig2
 
