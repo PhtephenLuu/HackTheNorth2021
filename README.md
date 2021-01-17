@@ -1,4 +1,4 @@
-# HackTheNorth2021
+# HackTheNorth2021 ![python tests](https://github.com/PhtephenLuu/HackTheNorth2021/workflows/Python%20package/badge.svg)
 
 Hello and welcome to our HackTheNorth2021 group project! We created a COVID dashboard for Canada using Python, Plotly and Dash. The visualizations display data gathered from the OpenCovid API [https://opencovid.ca/api/](https://opencovid.ca/api/). 
 
