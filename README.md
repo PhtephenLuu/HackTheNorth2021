@@ -10,9 +10,10 @@ pip install -r requirements.txt
 ```
 
 ## Deployment 
+This app is hosted using heroku, if you would like to host your own version please follow the instructions given by [this guide](https://towardsdatascience.com/deploying-your-dash-app-to-heroku-the-magical-guide-39bd6a0c586c). A word of advice, do not use static files as they make the hosting process 10x harder. 
 
-
-Terry ToDo List:
-    - import good looking fonts to replace Times New Roman
-    - CSS styling
-    - reorganize page layout to look better
+## Contributions
+I would like to profusely thank my teammates for helping me and comforting me along this journey of bugs and crashes.   
+* [Brian Hu](https://github.com/BriannHu)  
+* [Terry Ju](https://github.com/1terry)  
+* [Andrew Sun](https://github.com/andrew-jsun)  
