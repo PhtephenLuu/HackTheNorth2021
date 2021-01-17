@@ -178,24 +178,37 @@ def get_deaths_from_data(json_data):
         else:
             result['deaths'].append(current_cases)
     return result
-"""
-def get_cumul_deaths_from_data(json_data):
-    '''ONLY CAN BE USED IF STATS = "mortality" '''
-    result = {}
-    inner = json_data.get("mortality")
-    for each in inner:
-        current_date = each['date_death_report']
-        current_cases = each['cumulative_deaths']
-        if 'date_death_report' not in result:
-            result['date_death_report'] = [current_date]
-        else:
-            result['date_death_report'].append(current_date)
-        if 'cumulative_deaths' not in result:
-            result['cumulative_deaths'] = [current_cases]
-        else:
-            result['cumulative_deaths'].append(current_cases)
-    return result
-"""
+
+def get_prov_name(province):
+    if province == "AB":
+        prov = "Alberta"
+    elif province == "BC":
+        prov = "British Columbia"
+    elif province == "SK":
+        prov = "Saskatchewan"
+    elif province == "MB":
+        prov = "Manitoba"    
+    elif province == "ON":
+        prov = "Ontario"
+    elif province == "QC":
+        prov = "Quebec"
+    elif province == "NB":
+        prov = "New Brunswick"
+    elif province == "NS":
+        prov = "Nova Scotia"
+    elif province == "PE":
+        prov = "Prince Edward Island"
+    elif province == "NL":
+        prov = "Newfoundland and Labrador"
+    elif province == "YK":
+        prov = "Yukon"
+    elif province == "NT":
+        prov = "Northwest Territories"
+    elif province == "NU":
+        prov = "Nunavut"
+    
+    return prov
+
 def main():
     result = prompt()
     province = result['province'] # ex: ON

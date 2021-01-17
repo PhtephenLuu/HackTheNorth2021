@@ -14,8 +14,8 @@ STATS = "cases"
 
 #json_data = get_request(PROVINCE, DATES, STATS)
 df = get_all_info(PROVINCE, DATES)
-
-fig = px.line(df, x="date", y="count", color="topic", line_group="topic")
+PROVINCE = get_prov_name(PROVINCE)
+fig = px.line(df, x="date", y="count", color="topic", line_group="topic", title="Time-Series Data of {}".format(PROVINCE))
 
 
 app.layout = html.Div([
@@ -45,7 +45,7 @@ app.layout = html.Div([
             {'label': 'Nunavut', 'value': 'NU'},
             {'label': 'Ontario', 'value': 'ON'},
             {'label': 'Prince Edward Island', 'value': 'PE'},
-            {'label': 'Quebec City', 'value': 'QC'},
+            {'label': 'Quebec', 'value': 'QC'},
             {'label': 'Saskatchewan', 'value': 'SK'},
             {'label': 'Yukon', 'value': 'YT'}
         ],
@@ -90,7 +90,6 @@ app.layout = html.Div([
 
 ])
 
-
 @ app.callback(
     Output('dd-province-output-container', 'children'),
     [Input('province-dropdown', 'value')])
@@ -116,7 +115,8 @@ def update_graph(prov_val, time_val):
     #json_data = get_request(PROVINCE, DATES, STATS)
     
     df = get_all_info(PROVINCE, DATES)
-    fig = px.line(df, x="date", y="count", color="topic", line_group="topic")
+    PROVINCE = get_prov_name(PROVINCE)
+    fig = px.line(df, x="date", y="count", color="topic", line_group="topic", title="Time-Series Data of {}".format(PROVINCE))
     fig.update_layout(
         autosize=False,
         width=1000,
