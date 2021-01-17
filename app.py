@@ -30,12 +30,12 @@ app.layout = html.Div([
 
     html.Div([
         html.H3('Case overview'),
-        html.Img(
-            src=app.get_asset_url('virus-graphic.png'), className="resize2",),
+        #html.Img(
+            #src=app.get_asset_url('virus-graphic.png'), className="resize2",),
     ], className="info-box"),
 
     html.Img(
-        src=app.get_asset_url('virus-logo.png'), className="resize",),
+        #src=app.get_asset_url('virus-logo.png'), className="resize",),
 
     html.Div([
         html.H4('Fill in the boxes below:'),
