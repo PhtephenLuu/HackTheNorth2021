@@ -108,3 +108,9 @@
   width: 85px;
   height: auto;
 }
+
+#graph-container {
+  width: 49%;
+  display: inline-block;
+  margin-left: 60px;
+}

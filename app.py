@@ -17,6 +17,7 @@ STATS = ["cases", "mortality", "recovered", "testing", "active"]
 
 get_all_cumulative_info(PROVINCE, DATES)
 
+
 # json_data = get_request(PROVINCE, DATES, STATS)
 df = get_all_info(PROVINCE, DATES, STATS)
 PROVINCE = get_prov_name(PROVINCE)
@@ -94,11 +95,10 @@ app.layout = html.Div([
              className='info-display'),
     html.Div(id='dd-stats-output-container',
              className='info-display'),
-    dcc.Graph(
-        id='mapbox',
-        figure=fig
-    )
-
+    html.Div(
+        id="graph-container",
+        children=dcc.Graph(id="graph", figure=fig),
+    ),
 ])
 
 
@@ -117,7 +117,7 @@ def update_time_output(value):
 
 
 @ app.callback(
-    Output('mapbox', 'figure'),
+    Output('graph', 'figure'),
     Input('province-dropdown', 'value'),
     Input('time-dropdown', 'value'),
     Input('checklist', 'value')
@@ -125,15 +125,20 @@ def update_time_output(value):
 def update_graph(prov_val, time_val, stats):
     PROVINCE = prov_val
     DATES = calculate_date(time_val)
-    stats.sort() # sorts list to maintain color
+    stats.sort()  # sorts list to maintain color
     df = get_all_info(PROVINCE, DATES, stats)
     PROVINCE = get_prov_name(PROVINCE)
     fig = px.line(df, x="date", y="count", color="topic",
                   line_group="topic", title="Time-Series Data of {}".format(PROVINCE))
     fig.update_layout(
         autosize=True,
-        width=1000,
-        height=500,
+        margin=dict(
+            pad=0,
+        ),
+        title={
+            'x': 0.5,
+            'xanchor': 'center'
+        }
     )
     return fig
 
