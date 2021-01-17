@@ -65,61 +65,74 @@ def get_request(province="MB", dates=get_weekly(), stats="cases"):
     json_data = json.loads(response.text)
     return json_data
 
-def get_all_info(province="MB", dates=get_weekly()):
+def get_all_info(province="MB", dates=get_weekly(), stats=['cases']):
     '''returns dataframe with ALL info'''
+    stat_dict = {}
+
+    # {"cases": cases_info, "deaths: deaths_info"}
+    for stat in stats:
+        stat_dict[stat] = get_request(province, dates, stat)
+
+    '''
     cases_info = get_request(province, dates, "cases")
     deaths_info = get_request(province, dates, "mortality")
     recovered_info = get_request(province, dates, "recovered")
     testing_info = get_request(province, dates, "testing")
     active_info = get_request(province, dates, "active")
-    
+    '''
+
     result = {}
     result['date'] = []
     result['topic'] = []
     result['count'] = []
 
     # starting iterating through dictionaries
-    cases_inner = cases_info.get("cases")
-    for each in cases_inner:
-        current_date = each['date_report']
-        current_cases = abs(each['cases'])
-        result['date'].append(current_date)
-        result['topic'].append('cases')
-        result['count'].append(current_cases)
+    if 'cases' in stat_dict:
+        cases_inner = stat_dict['cases'].get("cases")
+        for each in cases_inner:
+            current_date = each['date_report']
+            current_cases = abs(each['cases'])
+            result['date'].append(current_date)
+            result['topic'].append('cases')
+            result['count'].append(current_cases)
 
-    deaths_inner = deaths_info.get("mortality")
-    for each in deaths_inner:
-        current_date = each['date_death_report']
-        current_deaths = abs(each['deaths'])
-        result['date'].append(current_date)
-        result['topic'].append('deaths')
-        result['count'].append(current_deaths)
+    if 'mortality' in stat_dict:
+        deaths_inner = stat_dict['mortality'].get("mortality")
+        for each in deaths_inner:
+            current_date = each['date_death_report']
+            current_deaths = abs(each['deaths'])
+            result['date'].append(current_date)
+            result['topic'].append('deaths')
+            result['count'].append(current_deaths)
 
-    recovered_inner = recovered_info.get("recovered")
-    for each in recovered_inner:
-        current_date = each['date_recovered']
-        current_recovered = abs(each['recovered'])
-        result['date'].append(current_date)
-        result['topic'].append('recovered')
-        result['count'].append(current_recovered)
+    if 'recovered' in stat_dict:
+        recovered_inner = stat_dict['recovered'].get("recovered")
+        for each in recovered_inner:
+            current_date = each['date_recovered']
+            current_recovered = abs(each['recovered'])
+            result['date'].append(current_date)
+            result['topic'].append('recovered')
+            result['count'].append(current_recovered)
 
-    testing_inner = testing_info.get("testing")
-    for each in testing_inner:
-        current_date = each['date_testing']
-        current_testing = abs(each['testing'])
-        if current_testing > 150000: #handles Alberta testing anomaly
-            current_testing /= 10
-        result['date'].append(current_date)
-        result['topic'].append('testing')
-        result['count'].append(current_testing)
+    if 'testing' in stat_dict:
+        testing_inner = stat_dict['testing'].get("testing")
+        for each in testing_inner:
+            current_date = each['date_testing']
+            current_testing = abs(each['testing'])
+            if current_testing > 150000: #handles Alberta testing anomaly
+                current_testing /= 10
+            result['date'].append(current_date)
+            result['topic'].append('testing')
+            result['count'].append(current_testing)
 
-    active_inner = active_info.get("active")
-    for each in active_inner:
-        current_date = each['date_active']
-        current_active = abs(each['active_cases'])
-        result['date'].append(current_date)
-        result['topic'].append('active_cases')
-        result['count'].append(current_active)     
+    if 'active' in stat_dict:
+        active_inner = stat_dict['active'].get("active")
+        for each in active_inner:
+            current_date = each['date_active']
+            current_active = abs(each['active_cases'])
+            result['date'].append(current_date)
+            result['topic'].append('active_cases')
+            result['count'].append(current_active)     
     
     return result
 

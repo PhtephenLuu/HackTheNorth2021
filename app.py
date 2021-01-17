@@ -10,10 +10,10 @@ app = dash.Dash()
 
 PROVINCE = "ON"
 DATES = get_weekly()
-STATS = "cases"
+STATS = ["cases", "mortality", "recovered", "testing", "active"]
 
 # json_data = get_request(PROVINCE, DATES, STATS)
-df = get_all_info(PROVINCE, DATES)
+df = get_all_info(PROVINCE, DATES, STATS)
 PROVINCE = get_prov_name(PROVINCE)
 fig = px.line(df, x="date", y="count", color="topic",
               line_group="topic", title="Time-Series Data of {}".format(PROVINCE))
@@ -114,14 +114,14 @@ def update_time_output(value):
 @ app.callback(
     Output('mapbox', 'figure'),
     Input('province-dropdown', 'value'),
-    Input('time-dropdown', 'value')
+    Input('time-dropdown', 'value'),
+    Input('checklist', 'value')
 )
-def update_graph(prov_val, time_val):
+def update_graph(prov_val, time_val, stats):
     PROVINCE = prov_val
     DATES = calculate_date(time_val)
-    # json_data = get_request(PROVINCE, DATES, STATS)
-
-    df = get_all_info(PROVINCE, DATES)
+    stats.sort() # sorts list to maintain color
+    df = get_all_info(PROVINCE, DATES, stats)
     PROVINCE = get_prov_name(PROVINCE)
     fig = px.line(df, x="date", y="count", color="topic",
                   line_group="topic", title="Time-Series Data of {}".format(PROVINCE))
