@@ -3,13 +3,11 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 from parse import *
-from whitenoise import Whitenoise
 import plotly.express as px
 import plotly.graph_objects as go
 
-app = dash.Dash()
+app = dash.Dash("__name__")
 server = app.server
-server.wsgi_app = WhiteNoise(server.wsgi_app, root='static/')
 
 PROVINCE = "ON"
 DATES = get_weekly()
@@ -32,12 +30,12 @@ app.layout = html.Div([
 
     html.Div([
         html.H3('Case overview'),
-        html.Img(
-            src=app.get_asset_url('virus-graphic.png'), className="resize2",),
+        #html.Img(
+            #src=app.get_asset_url('virus-graphic.png'), className="resize2",),
     ], className="info-box"),
 
-    html.Img(
-        src=app.get_asset_url('virus-logo.png'), className="resize",),
+    #html.Img(
+        #src=app.get_asset_url('virus-logo.png'), className="resize",),
 
     html.Div([
         html.H4('Fill in the boxes below:'),
