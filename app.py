@@ -6,7 +6,7 @@ from parse import *
 import plotly.express as px
 import plotly.graph_objects as go
 
-app = dash.Dash()
+app = dash.Dash("__name__")
 server = app.server
 
 PROVINCE = "ON"
