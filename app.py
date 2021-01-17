@@ -30,12 +30,12 @@ app.layout = html.Div([
 
     html.Div([
         html.H3('Case overview'),
-        #html.Img(
-            #src=app.get_asset_url('virus-graphic.png'), className="resize2",),
+        # html.Img(
+        # src=app.get_asset_url('virus-graphic.png'), className="resize2",),
     ], className="info-box"),
 
-    #html.Img(
-        #src=app.get_asset_url('virus-logo.png'), className="resize",),
+    # html.Img(
+    # src=app.get_asset_url('virus-logo.png'), className="resize",),
 
     html.Div([
         html.H4('Fill in the boxes below:'),
@@ -158,11 +158,10 @@ def update_bars(prov_val, time_val, stats):
 
     df2 = get_all_cumulative_info(PROVINCE, DATES, stats)
     fig2 = px.bar(df2, x="topic", y="count")
+    fig2.update_layout(
+        height=700,
+    )
     return fig2
-
-    f2.update_layout{
-        height = 700,
-    }
 
 
 if __name__ == "__main__":
