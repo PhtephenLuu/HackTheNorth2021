@@ -136,6 +136,45 @@ def get_all_info(province="MB", dates=get_weekly(), stats=['cases']):
     
     return result
 
+
+def get_all_cumulative_info(province="MB", dates=get_weekly()):
+    '''returns dataframe with ALL info'''
+    cases_info = get_request(province, dates, "cases")
+    deaths_info = get_request(province, dates, "mortality")
+    recovered_info = get_request(province, dates, "recovered")
+    testing_info = get_request(province, dates, "testing")
+    active_info = get_request(province, dates, "active")
+
+    # {topic: [cases -> active], 'count: [total_cases -> total_active]}
+    # {cases: total_cases, deaths: total_deaths, .....}
+    
+    result = {}
+    result['topic'] = ['cases', 'deaths', 'recovered', 'testing', 'active']
+    result['count'] = [0, 0, 0, 0, 0]
+
+    inner_cases = cases_info.get('cases')
+    for each in inner_cases:
+        result['count'][0] += int(each['cases'])
+    
+    inner_deaths = deaths_info.get("mortality")
+    for each in inner_deaths:
+        result['count'][1] += int(each['deaths'])
+
+    inner_recovered = recovered_info.get("recovered")
+    for each in inner_recovered:
+        result['count'][2] += int(each['recovered'])
+
+    inner_testing = testing_info.get("testing")
+    for each in inner_testing:
+        result['count'][3] += int(each['testing'])
+
+    inner_active = active_info.get("active")
+    for each in inner_active:
+        result['count'][4] += int(each['active_cases'])
+    print(result)
+    return result
+
+
 # {date:[1,2,3], cases=[30,40,50]}
 
 # {date=[1,2,3], topics=["cases", "cases", mortality, recovered, testing, active", ..., "active", ""], count=[30,40, 100]}

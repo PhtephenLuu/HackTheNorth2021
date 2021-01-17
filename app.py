@@ -12,6 +12,8 @@ PROVINCE = "ON"
 DATES = get_weekly()
 STATS = ["cases", "mortality", "recovered", "testing", "active"]
 
+get_all_cumulative_info(PROVINCE, DATES)
+
 # json_data = get_request(PROVINCE, DATES, STATS)
 df = get_all_info(PROVINCE, DATES, STATS)
 PROVINCE = get_prov_name(PROVINCE)
