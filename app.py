@@ -12,17 +12,23 @@ PROVINCE = "ON"
 DATES = get_weekly()
 STATS = "cases"
 
-#json_data = get_request(PROVINCE, DATES, STATS)
+# json_data = get_request(PROVINCE, DATES, STATS)
 df = get_all_info(PROVINCE, DATES)
 PROVINCE = get_prov_name(PROVINCE)
-fig = px.line(df, x="date", y="count", color="topic", line_group="topic", title="Time-Series Data of {}".format(PROVINCE))
+fig = px.line(df, x="date", y="count", color="topic",
+              line_group="topic", title="Time-Series Data of {}".format(PROVINCE))
 
 
 app.layout = html.Div([
     html.Div([
         html.H2('COVID-19 Data Visualization of Canada'),
-
     ], className="banner"),
+
+    html.Div([
+        html.H3('Case overview'),
+        html.Img(
+            src=app.get_asset_url('virus-graphic.png'), className="resize2",),
+    ], className="info-box"),
 
     html.Img(
         src=app.get_asset_url('virus-logo.png'), className="resize",),
@@ -65,16 +71,16 @@ app.layout = html.Div([
     ),
     html.Div([
         dcc.Checklist(
-        id="checklist",
-        options=[
-            {"label": "Cases", "value": "cases"},
-            {"label": "Deaths", "value": "mortality"},
-            {"label": "Recovered", "value": "recovered"},
-            {"label": "Testing", "value": "testing"},
-            {"label": "Active", "value": "active"}
-        ],
-        value=["cases", "mortality", "recovered", "testing", "active"],
-        labelStyle={'display': 'inline-block'}
+            id="checklist",
+            options=[
+                {"label": "Cases", "value": "cases"},
+                {"label": "Deaths", "value": "mortality"},
+                {"label": "Recovered", "value": "recovered"},
+                {"label": "Testing", "value": "testing"},
+                {"label": "Active", "value": "active"}
+            ],
+            value=["cases", "mortality", "recovered", "testing", "active"],
+            labelStyle={'display': 'inline-block'}
         )], className="checklist-container"
     ),
     html.Div(id='dd-province-output-container',
@@ -89,6 +95,7 @@ app.layout = html.Div([
     )
 
 ])
+
 
 @ app.callback(
     Output('dd-province-output-container', 'children'),
@@ -112,17 +119,19 @@ def update_time_output(value):
 def update_graph(prov_val, time_val):
     PROVINCE = prov_val
     DATES = calculate_date(time_val)
-    #json_data = get_request(PROVINCE, DATES, STATS)
-    
+    # json_data = get_request(PROVINCE, DATES, STATS)
+
     df = get_all_info(PROVINCE, DATES)
     PROVINCE = get_prov_name(PROVINCE)
-    fig = px.line(df, x="date", y="count", color="topic", line_group="topic", title="Time-Series Data of {}".format(PROVINCE))
+    fig = px.line(df, x="date", y="count", color="topic",
+                  line_group="topic", title="Time-Series Data of {}".format(PROVINCE))
     fig.update_layout(
-        autosize=False,
+        autosize=True,
         width=1000,
         height=500,
     )
     return fig
+
 
 if __name__ == "__main__":
     app.run_server(debug=True)
