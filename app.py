@@ -157,6 +157,7 @@ def update_bars(prov_val, time_val, stats):
     stats.sort()
 
     df2 = get_all_cumulative_info(PROVINCE, DATES, stats)
+    PROVINCE = get_prov_name(PROVINCE)
     fig2 = px.bar(df2, x="topic", y="count", title="Cumulative Data of {}".format(TITLE_PROVINCE))
     fig2.update_layout(
         height=700,
