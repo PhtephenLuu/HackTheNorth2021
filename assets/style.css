@@ -31,16 +31,16 @@
 
 #dd-province-output-container {
   position: absolute;
-  top: 155px;
-  left: 570px;
+  top: 255px;
+  left: 560px;
   width: 220px;
   height: 60px;
   background-color: transparent;
 }
 #dd-time-output-container {
   position: absolute;
-  top: 190px;
-  left: 570px;
+  top: 290px;
+  left: 560px;
   width: 220px;
   height: 40px;
   background-color: transparent;
@@ -101,10 +101,27 @@
   top: 1000px;
 }
 
+.input-header {
+  left: 5%;
+  top: 110px;
+  position: absolute;
+  padding-left: 10%;
+}
+
+.input-header-container {
+  z-index: -1;
+  width: 47.3%;
+  position: absolute;
+  height: 45px;
+  top: 100px;
+  left: 5%;
+  background-color: rgb(162, 244, 247);
+}
+
 .info-box {
   position: absolute;
-  top: 138px;
-  left: 570px;
+  top: 236px;
+  left: 560px;
   width: 230px;
   height: 4px;
   background-color: rgb(0, 0, 0);
@@ -112,10 +129,10 @@
 
 .info-header {
   padding-left: 20px;
-  padding-top: 15px;
-  position: absolute;
-  top: 80px;
-  left: 550px;
+  padding-top: 5px;
+  position: relative;
+  top: 115px;
+  left: 540px;
   width: 200px;
 }
 
@@ -123,8 +140,8 @@
   z-index: -1;
   width: 38.3%;
   display: inline-block;
-  position: absolute;
-  height: 50px;
+  position: relative;
+  height: 45px;
   top: 295px;
   margin-left: 5%;
   background-color: rgb(162, 244, 247);
@@ -132,19 +149,19 @@
 .graph-header {
   width: 25%;
   display: inline-block;
-  position: absolute;
-  top: 307px;
+  position: relative;
+  top: 325px;
   padding-left: 14.5%;
   background: transparent;
 }
 .bar-header-container {
   z-index: -1;
-  width: 34%;
-  margin-right: 7%;
+  width: 33%;
   display: inline-block;
   float: right;
   top: 100px;
   height: 80px;
+  right: 9%;
   background-color: rgb(162, 244, 247);
   position: absolute;
 }

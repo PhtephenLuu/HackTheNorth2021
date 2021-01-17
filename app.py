@@ -46,9 +46,15 @@ app.layout = html.Div([
                 className="bar-header"),
     ]),
     html.Div([
+        html.H3('Input variables for dynamic output',
+                className="input-header"),
+    ]),
+    html.Div([
     ], className="bar-header-container"),
     html.Div([
     ], className="graph-header-container"),
+    html.Div([
+    ], className="input-header-container"),
     # html.Img(
     # src=app.get_asset_url('virus-logo.png'), className="resize",),
 
@@ -176,7 +182,7 @@ def update_bars(prov_val, time_val, stats):
     fig2 = px.bar(df2, x="topic", y="count",
                   title="Cumulative Data of {}".format(PROVINCE))
     fig2.update_layout(
-        height=700,
+        height=780,
         title={
             'x': 0.5,
             'xanchor': 'center'
