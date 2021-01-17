@@ -3,9 +3,12 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 from parse import *
+from whitenoise import Whitenoise
 import plotly.express as px
 import plotly.graph_objects as go
 
+server = app.server
+server.wsgi_app = WhiteNoise(server.wsgi_app, root=‘static/’)
 app = dash.Dash()
 
 PROVINCE = "ON"
