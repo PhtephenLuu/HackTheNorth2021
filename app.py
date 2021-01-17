@@ -132,6 +132,10 @@ def update_graph(prov_val, time_val, stats):
         margin=dict(
             pad=0,
         ),
+        title={
+            'x': 0.5,
+            'xanchor': 'center'
+        }
     )
     return fig
 
