@@ -146,7 +146,8 @@ def update_graph(prov_val, time_val, stats):
     )
     return fig
 
-@ app.callback (
+
+@ app.callback(
     Output('graph2', 'figure'),
     Input('province-dropdown', 'value'),
     Input('time-dropdown', 'value'),
@@ -160,6 +161,11 @@ def update_bars(prov_val, time_val, stats):
     df2 = get_all_cumulative_info(PROVINCE, DATES, stats)
     fig2 = px.bar(df2, x="topic", y="count")
     return fig2
+
+    f2.update_layout{
+        height = 700,
+    }
+
 
 if __name__ == "__main__":
     app.run_server(debug=True)

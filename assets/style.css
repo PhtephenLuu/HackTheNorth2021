@@ -32,17 +32,17 @@
 #dd-province-output-container {
   position: absolute;
   top: 177px;
-  right: 25px;
-  width: 425px;
-  height: 100px;
+  right: 785px;
+  width: 200px;
+  height: 60px;
   background-color: rgb(243, 236, 236);
 }
 #dd-time-output-container {
   position: absolute;
   top: 217px;
-  right: 25px;
-  width: 425px;
-  height: 100px;
+  right: 785px;
+  width: 200px;
+  height: 60px;
   background-color: rgb(243, 236, 236);
 }
 
@@ -81,6 +81,14 @@
   width: auto;
 }
 
+.resize2 {
+  position: absolute;
+  top: -2px;
+  right: 13px;
+  width: 80px;
+  height: auto;
+}
+
 .mapbox {
   position: absolute;
   width: 60%;
@@ -89,10 +97,10 @@
 
 .info-box {
   position: absolute;
-  top: 107px;
-  right: 25px;
-  width: 450px;
-  height: 250px;
+  top: 90px;
+  right: 770px;
+  width: 230px;
+  height: 190px;
   background-color: rgb(243, 236, 236);
 }
 
@@ -101,16 +109,47 @@
   padding-top: 15px;
 }
 
-.resize2 {
-  position: absolute;
-  top: 0px;
-  right: 230px;
-  width: 85px;
-  height: auto;
+#graph-container {
+  width: 53%;
+  display: inline-block;
+  margin-left: 0px;
+  float: left;
 }
 
-#graph-container {
-  width: 49%;
+#bar-container {
+  width: 43%;
   display: inline-block;
-  margin-left: 60px;
+  float: right;
+  height: 600px;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  margin-left: 50%;
+  margin-top: 50%;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
