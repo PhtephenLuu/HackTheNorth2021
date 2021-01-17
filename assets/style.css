@@ -8,6 +8,7 @@
 .about {
   margin-left: 5rem;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .checklist-container {
@@ -32,23 +33,21 @@
   position: absolute;
   width: 40%;
   margin-left: 460px;
-  top: 137px;
+  top: 143px;
 }
 #dd-time-output-container {
   position: absolute;
   width: 40%;
   margin-left: 460px;
-  top: 184px;
-}
-#dd-stats-output-container {
-  position: absolute;
-  width: 40%;
-  margin-left: 460px;
-  top: 260px;
+  top: 192px;
 }
 
 #checklist {
   margin-top: 15px;
+}
+
+#checklist label {
+  padding-right: 20px;
 }
 
 .banner {
@@ -67,13 +66,14 @@
 .banner h2 {
   padding-left: 15px;
   padding-top: 25px;
+  width: 30%;
 }
 
 .resize {
   position: absolute;
-  top: 0px;
+  top: 5px;
   left: 540px;
-  height: 70px;
+  height: 60px;
   width: auto;
 }
 
@@ -85,8 +85,8 @@
 
 .info-box {
   position: absolute;
-  top: 100px;
-  right: 80px;
+  top: 107px;
+  right: 25px;
   width: 450px;
   height: 150px;
   background-color: rgb(243, 236, 236);
