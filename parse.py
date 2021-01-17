@@ -5,7 +5,6 @@ import requests
 import pandas as pd
 
 
-
 def prompt():
     result = {}
     # options are ["AB", "BC", "MB", "NB", "NL", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT"]
@@ -180,34 +179,25 @@ def get_deaths_from_data(json_data):
     return result
 
 def get_prov_name(province):
-    if province == "AB":
-        prov = "Alberta"
-    elif province == "BC":
-        prov = "British Columbia"
-    elif province == "SK":
-        prov = "Saskatchewan"
-    elif province == "MB":
-        prov = "Manitoba"    
-    elif province == "ON":
-        prov = "Ontario"
-    elif province == "QC":
-        prov = "Quebec"
-    elif province == "NB":
-        prov = "New Brunswick"
-    elif province == "NS":
-        prov = "Nova Scotia"
-    elif province == "PE":
-        prov = "Prince Edward Island"
-    elif province == "NL":
-        prov = "Newfoundland and Labrador"
-    elif province == "YK":
-        prov = "Yukon"
-    elif province == "NT":
-        prov = "Northwest Territories"
-    elif province == "NU":
-        prov = "Nunavut"
-    
-    return prov
+    prov = {
+        "AB": "Alberta",
+        "BC": "British Columbia",
+        "MB": "Manitoba",
+        "NB": "New Brunswick",
+        "NL": "Newfoundland and Labrador",
+        "NT": "Northwest Territories",
+        "NS": "Nova Scotia",
+        "NU": "Nunavut",
+        "ON": "Ontario",
+        "PE": "Prince Edward Island",
+        "QC": "Quebec",
+        "SK": "Saskatchewan",
+        "YT": "Yukon",
+    }
+
+    if province in prov:
+        return prov[province]
+    return
 
 def main():
     result = prompt()
