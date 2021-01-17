@@ -34,7 +34,7 @@ app.layout = html.Div([
             #src=app.get_asset_url('virus-graphic.png'), className="resize2",),
     ], className="info-box"),
 
-    html.Img(
+    #html.Img(
         #src=app.get_asset_url('virus-logo.png'), className="resize",),
 
     html.Div([
