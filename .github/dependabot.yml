@@ -8,4 +8,4 @@ updates:
   - package-ecosystem: "pip" # See documentation for possible values
     directory: "/" # Location of package manifes
     schedule:
-      interval: "daily"
+      interval: "monthly"

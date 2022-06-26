@@ -1,6 +1,6 @@
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 from dash.dependencies import Input, Output
 from parse import *
 import plotly.express as px
@@ -16,6 +16,7 @@ STATS = ["cases", "mortality", "recovered", "testing", "active"]
 
 # json_data = get_request(PROVINCE, DATES, STATS)
 df = get_all_info(PROVINCE, DATES, STATS)
+print(df)
 TITLE_PROVINCE = get_prov_name(PROVINCE)
 fig = px.line(df, x="Date", y="Count", color="Statistic",
               line_group="Statistic", title="Time-Series Data of {}".format(TITLE_PROVINCE))
